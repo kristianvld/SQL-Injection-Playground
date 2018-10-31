@@ -20,6 +20,7 @@
                 "Basic Login, bypass the login page"=>"login.php",
                 "Bit Better Login, bypass the login page"=>"login2.php",
                 "Common US Names Query, extract data from secret tables"=>"person.php", 
+                "Improved Common US Names Query, extract data from secret tables"=>"person2.php", 
             ];
             foreach($persons as $name=>$url) {
                 echo '<tr>';
