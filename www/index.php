@@ -17,9 +17,9 @@
         <thead><tr><th>URL</th><th>Name</th></tr></thead>
         <?php
             $persons = [
-                "Persons"=>"person.php", 
-                "Basic Login"=>"login.php",
-                "Bit Better Login"=>"login2.php",
+                "Basic Login, bypass the login page"=>"login.php",
+                "Bit Better Login, bypass the login page"=>"login2.php",
+                "Common US Names Query, extract data from secret tables"=>"person.php", 
             ];
             foreach($persons as $name=>$url) {
                 echo '<tr>';
