@@ -21,6 +21,7 @@
                 "Bit Better Login. Bypass the login page."=>"login2.php",
                 "Common US Names Query. Extract data from secret tables."=>"person.php", 
                 "Improved Common US Names Query. Extract data from secret tables."=>"person2.php", 
+                "Blind Lookup. Extract data using blind sql injection (hard)."=>"blind.php", 
                 "Reset. Reset the entire mysql database."=>"reset.php", 
             ];
             foreach($persons as $name=>$url) {
