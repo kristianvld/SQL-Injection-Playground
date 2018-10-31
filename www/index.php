@@ -17,10 +17,11 @@
         <thead><tr><th>URL</th><th>Name</th></tr></thead>
         <?php
             $persons = [
-                "Basic Login, bypass the login page"=>"login.php",
-                "Bit Better Login, bypass the login page"=>"login2.php",
-                "Common US Names Query, extract data from secret tables"=>"person.php", 
-                "Improved Common US Names Query, extract data from secret tables"=>"person2.php", 
+                "Basic Login. Bypass the login page."=>"login.php",
+                "Bit Better Login. Bypass the login page."=>"login2.php",
+                "Common US Names Query. Extract data from secret tables."=>"person.php", 
+                "Improved Common US Names Query. Extract data from secret tables."=>"person2.php", 
+                "Reset. Reset the entire mysql database."=>"reset.php", 
             ];
             foreach($persons as $name=>$url) {
                 echo '<tr>';
