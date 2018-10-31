@@ -1,6 +1,6 @@
 <html>
  <head>
-  <title>Hello...</title>
+  <title>SQL Injection Playground</title>
 
   <meta charset="utf-8"> 
 
@@ -11,27 +11,23 @@
 </head>
 <body>
     <div class="container">
-    <?php echo "<h1>Hi! I'm happy</h1>"; ?>
-
-    <?php
-    // Connexion et sélection de la base
-    $conn = mysqli_connect('db', 'user', 'UserPassword', "main_db");
-    $query = 'SELECT * From Person';
-    $result = mysqli_query($conn, $query);
-    echo '<table class="table table-striped">';
-    echo '<thead><tr><th></th><th>id</th><th>name</th></tr></thead>';
-    while($value = $result->fetch_array(MYSQLI_ASSOC)){
-        echo '<tr>';
-        echo '<td><a href="#"><span class="glyphicon glyphicon-search"></span></a></td>';
-        foreach($value as $element){
-            echo '<td>' . $element . '</td>';
-        }
-        echo '</tr>';
-    }
-    echo '</table>';
-    $result->close();
-    mysqli_close($conn);
-    ?>
+    <h1>Welcome to the SQL Injection Playground</h1>
+    <h4>Here are some endpoints to play around with:</h4>
+    <table class="table table-striped">
+        <thead><tr><th>URL</th><th>Name</th></tr></thead>
+        <?php
+            $persons = [
+                "Persons"=>"person.php", 
+                "Basic Login"=>"login.php",
+                "Bit Better Login"=>"login2.php",
+            ];
+            foreach($persons as $name=>$url) {
+                echo '<tr>';
+                echo '<td><a href="'.$url.'"><span class="glyphicon glyphicon-search"></span></a></td><td>'.$name.'</td>';
+                echo '</tr>';
+            }
+        ?>
+    </table>
     </div>
 </body>
 </html>
