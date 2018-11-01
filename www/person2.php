@@ -112,6 +112,11 @@ p {
 
 </head>
 <body>
+    <div style="position: static; font-size: 20px; padding: 5px;">
+        <a href="/">
+            <i class="glyphicon glyphicon-home"></i>
+        </a>
+    </div>
     <div class="container">
     <h1>Common Names (All Ages) in the United States 1990</h1>
     <div class="anchor">

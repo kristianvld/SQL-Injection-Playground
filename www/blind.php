@@ -4,7 +4,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
@@ -46,12 +45,12 @@
 .form input[type=submit]:hover,.form input[type=submit]:active,.form input[type=submit]:focus {
   background: #43A047;
 }
-p {
+.form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
-p a {
+.form .message a {
   color: #4CAF50;
   text-decoration: none;
 }
@@ -106,27 +105,35 @@ body {
 }
         </style>
     <title>Blind user lookup</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </header>
     <body>
+      <div style="position: static; font-size: 20px; padding: 5px;">
+        <a href="/" style="color: #4CAF50">
+          <i class="glyphicon glyphicon-home"></i>
+        </a>
+      </div>
       <div class="login-page">
-        <div class="form">
-          <h3>User lookup:</h3>
-          <?php
-            if ($_POST["username"]) {
-              include_once("sql.php");
-              $name = $_POST["username"];
-              $query = "SELECT * FROM blind_users WHERE username='$name'";
-              $result = mysqli_query($conn, $query);
-              if (!$result) {
-                echo "<p><b>$query</b></p>";
-                echo "<p><b>".mysqli_error($conn)."</b></p>";
-              } else if ($result->num_rows) {
-                echo '<h3>User exists.</h3>';
-              } else {
-                echo '<h3>Unknown user.</h3>';
-              }
+        <?php
+          if ($_POST["username"]) {
+            include_once("sql.php");
+            $name = $_POST["username"];
+            $query = "SELECT * FROM blind_users WHERE username='$name'";
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+              $style = 'style="max-width: 800px;"';
+              $resp = "<p><b>Error:</b> ".mysqli_error($conn)."</p>";
+              $resp .= "<p><b>Query:</b> $query</p>";
+            } else if ($result->num_rows) {
+              $resp = '<h3>User exists.</h3>';
+            } else {
+              $resp = '<h3>Unknown user.</h3>';
             }
-          ?>
+          }
+        ?>
+        <div class="form" <?php echo $style;?>>
+          <h3>User lookup:</h3>
+          <?php echo $resp; ?>
           <form class="login-form" method="POST" id="login-form">
             <input type="text" placeholder="username" name="username"/>
             <input type="submit" value="Lookup">
