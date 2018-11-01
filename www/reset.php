@@ -3,7 +3,9 @@ session_start();
 ?>
 <html>
     <header>
-        <style>
+      <title>MySQL Reset</title>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
@@ -104,15 +106,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
-        </style>
+      </style>
     </header>
 
     <body>
+        <div style="position: static; font-size: 20px; padding: 5px;">
+            <a href="/" style="color: #4CAF50">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </div>
         <div class="login-page">
             <div class="form">
                 <h1>Reset Page</h1>
                 <p>Are you sure you want to reset? This will reset the entire sql database.</p>
-                <form method="POST">
+                <form method="POST" style="padding-top: 10px;">
                     <input type="hidden" name="confirm-reset">
                     <input type="submit" value="Confirm">
                 </form>
@@ -122,12 +129,12 @@ body {
                         $result = mysqli_query($conn, "SELECT DATABASE() as db");
                         if(!$result)
                         {
-                            echo "Error reading database name.";
+                            echo "<p>Error reading database name.</p>";
                             echo mysqli_error($conn);
                         } else {
                             $db = mysqli_fetch_assoc($result)["db"];
                             if(!mysqli_multi_query($conn, "DROP DATABASE IF EXISTS $db; CREATE DATABASE $db;")) {
-                                echo "Error dropping/creating database.";
+                                echo "<p>Error dropping/creating database.</p>";
                                 echo mysqli_error($conn);
                             } else {
                                 echo "<p>Dropped and recreated database.</p>";

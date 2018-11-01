@@ -7,7 +7,6 @@ session_start();
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
@@ -105,26 +104,38 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
         </style>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <title>Secure Hashed Login</title>
     </header>
 
     <body>
+        <div style="position: static; font-size: 20px; padding: 5px;">
+          <a href="/" style="color: #4CAF50">
+            <i class="glyphicon glyphicon-home"></i>
+          </a>
+        </div>
         <div class="login-page">
-            <div class="form">
                 <?php
-                    if (!$_SESSION["user_2"] && $_POST["username"] && $_POST["password"]) {
+                    if (!$_SESSION["user_2"] && ($_POST["username"] || $_POST["password"])) {
                         include_once("sql.php");
                         $name = $_POST["username"];
                         $password = hash("sha512", $_POST["password"]);
                         $query = "SELECT * From basic_accounts_2 where username='$name' and password='$password'";
                         $result = mysqli_query($conn, $query);
                         if (!$result) {
-                            echo $query . "<br>";
-                            echo mysqli_error($conn);
-                        } else if ($result->num_rows) {
-                            $_SESSION["user_2"] = $result->fetch_assoc()["username"];
+                            echo '<div class="form" style="max-width:1200px;">';
+                            echo "<p><b>Error:</b> ".mysqli_error($conn)."</p>";
+                            echo "<p><b>Query:</b> $query</p>";
                         } else {
+                          echo '<div class="form">';
+                          if ($result->num_rows) {
+                            $_SESSION["user_2"] = $result->fetch_assoc()["username"];
+                          } else {
                             echo '<h3>Invalid username or password.</h3>';
+                          }
                         }
+                    } else {
+                      echo '<div class="form">';
                     }
 
                     if (isset($_POST["logout"])) {
@@ -145,6 +156,7 @@ body {
                             <input type="text" placeholder="username" name="username"/>
                             <input type="password" placeholder="password" name="password"/>
                             <input type="submit" value="Login">
+                            <p class="message">The password storage has been improved to use sha512. How does this affect your input?</p>
                         </form>
                         <?php
                     }
